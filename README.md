@@ -1,4 +1,4 @@
-# OOP - Dependency Injection
+# OOP - Polymorphism
 
 1. Fork and clone this repository
 2. `npm ci` to install dependencies

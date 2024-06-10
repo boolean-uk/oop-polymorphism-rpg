@@ -32,3 +32,4 @@ Create a simple RPG where a character can battle monsters
     - `strength` that increases damage dealt by 0.5% per point
     - `defense` that decreases damage taken by 0.4% per point
     - `criticalStrikeChance` that increases by 0.5% per point the chance that a character will deal double the amount of damage it deals in a single hit
+4. You'll be able to expand on this to create an actual game, if you so wish. Try creating a user interface!

@@ -3,7 +3,7 @@ class Character  {
         this.name = ''
         this.maxHitPoints = 30
         this.currentHitPoints = 30
-        this.damage = 5
+        this.damage = 2
     }
 
     takeDamage(attacker) {
@@ -24,7 +24,7 @@ class Player extends Character {
 class Enemy1 extends Character {
     constructor() {
         super().name = 'Villmata'
-        this.damage = 10
+        this.damage = 5
     }
 
     hitsObsorbed(combatant) {
@@ -35,7 +35,7 @@ class Enemy1 extends Character {
 class Enemy2 extends Character {
     constructor() {
         super().name = 'Bearl'
-        this.damage = 3
+        this.damage = 2
     }
 
     hitsObsorbed(combatant) {
@@ -46,7 +46,7 @@ class Enemy2 extends Character {
 class Enemy3 extends Character {
     constructor() {
         super().name = 'Clawes'
-        this.damage = 6
+        this.damage = 4
     }
 
     hitsObsorbed(combatant) {
@@ -80,11 +80,71 @@ class BattleScene extends Character {
 
 class EquippableItem {
     constructor() {
-        this.damageModifier = 7
+        this.damageModifier = 0
     }
 
     calculateDamage(damage) {
         damage += this.damageModifier
+    }
+}
+
+class Sword extends EquippableItem {
+    constructor() {
+        super()
+        this.name = 'Sword of Mrtyu'
+        this.damage = 7
+        this.armour = 1
+    }
+
+    mrtyuSwing(attack) {
+        attack.calculateDamage(this.damage)
+    }
+
+    mrtyuBlock(defend) {
+        defend.calculateDamage(this.armour)
+    }
+}
+
+class ChestPlate extends EquippableItem {
+    constructor() {
+        super()
+        this.name = 'Chest Guard'
+        this.damage = 0
+        this.armour = 10
+    }
+
+    chestGuard(defend) {
+        defend.calculateDamage(this.armour)
+    }
+}
+
+class Helmet extends EquippableItem {
+    constructor() {
+        super()
+        this.name = 'Helmet'
+        this.damage = 2
+        this.armour = 7
+    }
+
+    helmet(attack) {
+        attack.calculateDamage(this.damage)
+    }
+
+    helmet(defend) {
+        defend.calculateDamage(this.armour)
+    }
+}
+
+class Gauntlet extends EquippableItem {
+    constructor() {
+        super()
+        this.name = 'Gauntlet'
+        this.damage = 0
+        this.armour = 3
+    }
+
+    gauntlet(defend) {
+        defend.calculateDamage(this.armour)
     }
 }
 

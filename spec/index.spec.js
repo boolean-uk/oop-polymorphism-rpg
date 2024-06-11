@@ -81,6 +81,13 @@ describe("Characters", () => {
 
     expect(player1.currentHitPoints).toEqual(92)
   })
+
+  it("should take into account character's strength stat when calculating damage output", ()=>{
+    player1.strength = 40
+    enemy3.takeDamage(player1)
+
+    expect(enemy3.currentHitPoints).toEqual(20)
+  })
 });
 
 

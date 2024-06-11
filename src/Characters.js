@@ -5,7 +5,8 @@ class Character {
     currentHitPoints,
     damage,
     equippedWeapon = "",
-    equippedArmour = []
+    equippedArmour = [],
+    strength
   ) {
     this.name = name;
     this.maxHitPoints = maxHitPoints;
@@ -13,14 +14,26 @@ class Character {
     this._damage = damage;
     this.equippedWeapon = equippedWeapon;
     this.equippedArmour = equippedArmour;
+    this._strength = strength
   }
 
   get damage() {
     if (this.equippedWeapon) {
-      return this.equippedWeapon.calculateDamage(this._damage);
+      return this.equippedWeapon.calculateDamage(this._damage) * this.strengthMultiplier
     } else {
-      return this._damage;
+      return this._damage * this.strengthMultiplier
     }
+  }
+
+  set strength(strength) {
+    this._strength = strength
+  }
+
+  get strengthMultiplier() {
+    if (!this._strength) {
+      return 1
+    } 
+    return ((this._strength * 0.005) + 1)
   }
 
   takeDamage(attacker) {

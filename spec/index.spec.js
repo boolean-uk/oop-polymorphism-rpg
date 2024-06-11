@@ -103,19 +103,19 @@ describe('Character Classes', () => {
 
     describe('Attributes in damage calculation', () => {
         it('should calculate atrribute based damage resistance correctly', () => {
-            player.attributes.set('defence', 20)
+            player.attributes.set('defence', 200)
             expect(player.takeDamage(npc)).toBe(98)
         })
 
         it('should calculate atrribute based damage output correctly', () => {
-            player.attributes.set('strength', 20)
+            player.attributes.set('strength', 200)
             expect(player.damageOutput()).toBe(20)
         })
 
         it('should calculate atrribute based damage output correctly when a critical strike occurs', () => {
-            player.attributes.set('strength', 20)
-            player.attributes.set('critChance', 100)
-            expect(player.damageOutput()).toBe(20)
+            player.attributes.set('strength', 200)
+            player.attributes.set('critChance', 10000)
+            expect(player.damageOutput()).toBe(40)
         })
     })
 })

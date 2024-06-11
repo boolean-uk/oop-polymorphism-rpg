@@ -51,14 +51,14 @@ export default class Character {
             damage = weapons[i].calculateDamage(damage)
         }
 
-        const finalDamage = damage * Math.round(1 + (strength * 0.05))
+        const finalDamage = damage * Math.round(1 + (strength * 0.005))
         return finalDamage * (this.isCrit() ? 2 : 1)
     }
 
     isCrit() {
         const critChance = this.attributes.get('critChance', 0)
         
-        if((Math.floor(Math.random() * 101)) < (critChance * 0.05)) {
+        if((Math.floor(Math.random() * 101)) < (critChance * 0.005)) {
             return true
         }
 
@@ -78,7 +78,7 @@ export default class Character {
         const damageTaken = attacker.damageOutput() - this.damageResist()
         const defence = this.attributes.get('defence')
 
-        this.currentHitPoints -= this.damageTaken < 0 ? 0 : Math.ceil((damageTaken * (1 - (defence * 0.04))))
+        this.currentHitPoints -= this.damageTaken < 0 ? 0 : Math.ceil((damageTaken * (1 - (defence * 0.004))))
         return this.currentHitPoints
     }
 }

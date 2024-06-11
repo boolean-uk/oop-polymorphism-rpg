@@ -12,6 +12,8 @@ class NonPlayerCharacter extends Character {
     }
 }
 
+
+
 class BattleScene {
     fight(character1, character2) {
         if (
@@ -40,4 +42,8 @@ class BattleScene {
     }
 }
 
-export { Player, NonPlayerCharacter, BattleScene }
+export {
+    Player,
+    NonPlayerCharacter,
+    BattleScene,
+}

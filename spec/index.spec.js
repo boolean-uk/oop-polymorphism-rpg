@@ -1,11 +1,10 @@
-import Player, { Ogre, Undead, Slime, BattleScene } from "../src/index.js";
+import Player, { Ogre, Undead, Slime, BattleScene, MoonLightSword } from "../src/index.js";
 
 describe('Characters', () => {
     let player
     let ogre
     let undead
     let slime
-    let battleScene
 
     beforeEach(() => {
         player = new Player({name: 'Jane', maxHitPoints: 150, damage: 20})
@@ -47,6 +46,7 @@ describe('Battle scene', () => {
     let undead
     let slime
     let battleScene
+    let moonLightSword
 
     beforeEach(() => {
         player = new Player({name: 'Jane', maxHitPoints: 150, damage: 20})
@@ -54,6 +54,7 @@ describe('Battle scene', () => {
         undead = new Undead({name: 'Jacob', maxHitPoints: 80, damage: 30})
         slime = new Slime({name: 'Mr. Bubbles', maxHitPoints: 180, damage: 8})
         battleScene = new BattleScene()
+        moonLightSword = new MoonLightSword(40)
     })
 
     it('should exist', () => {
@@ -76,6 +77,26 @@ describe('Battle scene', () => {
         const result = battleScene.fight(player, slime)
 
         expect(result).toEqual(player)
+    })
+
+    it('character should be able to equip a weapon', () => {
+        player.equipWeapon(moonLightSword)
+
+        expect(player.equipedWeapon.damageModifier).toBe(40)
+    })
+
+    it('should throw an error if character tries to equip more than one weapon', () => {
+        player.equipWeapon(moonLightSword)
+
+        expect(() => player.equipWeapon(moonLightSword)).toThrow('you have reached the max of 1 weapon item')
+    })
+
+    it('should deal extra damaga when having a weapon equipped', () => {
+        undead.equipWeapon(moonLightSword)
+
+        const result = battleScene.fight(player, undead)
+
+        expect(result).toEqual(undead)
     })
 })
 

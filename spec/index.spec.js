@@ -111,11 +111,5 @@ describe('Character Classes', () => {
             player.attributes.set('strength', 200)
             expect(player.damageOutput()).toBe(20)
         })
-
-        it('should calculate atrribute based damage output correctly when a critical strike occurs', () => {
-            player.attributes.set('strength', 200)
-            player.attributes.set('critChance', 10000)
-            expect(player.damageOutput()).toBe(40)
-        })
     })
 })

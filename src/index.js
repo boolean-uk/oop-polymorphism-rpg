@@ -67,7 +67,6 @@ class BattleScene extends Character {
             enemy.takeDamage(player)
             if (
                 player.currentHitPoints === 0
-                
             ) {
                 return enemy.name
             } else if (
@@ -78,6 +77,17 @@ class BattleScene extends Character {
         }
     }
 }
+
+class EquippableItem {
+    constructor() {
+        this.damageModifier = 7
+    }
+
+    calculateDamage(damage) {
+        damage += this.damageModifier
+    }
+}
+
 export { Player, Enemy1, BattleScene }
 export default Character
 

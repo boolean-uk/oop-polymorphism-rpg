@@ -17,4 +17,23 @@ class Player extends Character {
     }
 }
 
+class Ogre extends Character {
+    constructor(character) {
+        super(character)
+    }
+}
+
+class Undead extends Character {
+    constructor(character) {
+        super(character)
+    }
+}
+
+class Slime extends Character {
+    constructor(character) {
+        super(character)
+    }
+}
+
 export default Player
+export { Ogre, Undead, Slime }

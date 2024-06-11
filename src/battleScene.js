@@ -1,4 +1,8 @@
 import Player from "./player.js"
+import Character from "./index.js"
+import Goblin from "./goblin.js"
+
+
 class BattleScene {
 	constructor(p1, p2) {
 		this.p1 = p1
@@ -17,7 +21,8 @@ class BattleScene {
 			)
 			if (this.p1.currentHitPoints <= 0) {
 				console.log(`\n\n${this.p2.name} has won the fight!`)
-				break
+				return `${this.p2.name} has won the fight!`
+				
 			}
 			this.p2.takeDamage(this.p1)
 			console.log(
@@ -25,7 +30,8 @@ class BattleScene {
 			)
 			if (this.p2.currentHitPoints <= 0) {
 				console.log(`\n\n${this.p1.name} has won the fight!`)
-				break
+				return `${this.p1.name} has won the fight!`
+				
 			}
 		}
 	}
@@ -33,3 +39,8 @@ class BattleScene {
 
 export default BattleScene
 
+// const gob = new Goblin()
+// const pl1 = new Player('Test', 55, 9)
+
+// const battle = new BattleScene(gob, pl1)
+//  battle.fight()

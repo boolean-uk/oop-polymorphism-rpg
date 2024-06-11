@@ -53,8 +53,8 @@ describe("BatleScene", () => {
 	let player2
 
 	beforeEach(() => {
-		player1 = new Player("Hero", 5, 1)
-		player2 = new Player("Enemy", 3, 1)
+		player1 = new Player("Hero", 50, 5)
+		player2 = new Player("Enemy", 5, 1)
 		fight = new BattleScene(player1, player2)
 	})
 
@@ -64,9 +64,14 @@ describe("BatleScene", () => {
     
     it('should accept 2 players', () => {
         expect(fight.p1.name).toBe('Hero')
-        expect(fight.p1.damage).toBe(1)
+        expect(fight.p1.damage).toBe(5)
         expect(fight.p2.name).toBe('Enemy')
         expect(fight.p2.damage).toBe(1)
-    })
-    // I have no idea how to test the loop
+	})
+	
+	it('should return the name of the winner', () => {
+		expect(fight.fight()).toEqual('Hero has won the fight!')
+	})
+    
+
 })

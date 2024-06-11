@@ -17,7 +17,7 @@ Create a simple RPG where a character can battle monsters
 - Using inheritance, create a `Player` character
 - Using inheritance, create a variety of different enemy characters
     - Create _at least_ 3 different enemies
-- Create a `BattleScene` class with a `fight` method that takes two characters its parameters
+- Create a `BattleScene` class with a `fight` method that takes two characters as its parameters
     - Using a `while` loop, make the characters hit each other (using their `takeDamage` methods) until one of them runs out of hit points, then return the winning character's name
 - You must create at least one test for each function you create
 

@@ -35,5 +35,22 @@ class Slime extends Character {
     }
 }
 
+class BattleScene {
+    fight(player, enemy) {
+        while(player.currentHitPoints > 0 && enemy.currentHitPoints > 0) {
+            enemy.takeDamage(player)
+            player.takeDamage(enemy)
+
+            if (player.currentHitPoints <= 0 ) {
+                return enemy
+            }
+
+            if (enemy.currentHitPoints <= 0) {
+                return player 
+            }
+        }
+    }
+}
+
 export default Player
-export { Ogre, Undead, Slime }
+export { Ogre, Undead, Slime, BattleScene }

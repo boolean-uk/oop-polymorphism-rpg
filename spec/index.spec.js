@@ -1,10 +1,11 @@
-import Player, { Ogre, Undead, Slime } from "../src/index.js";
+import Player, { Ogre, Undead, Slime, BattleScene } from "../src/index.js";
 
 describe('Characters', () => {
     let player
     let ogre
     let undead
     let slime
+    let battleScene
 
     beforeEach(() => {
         player = new Player({name: 'Jane', maxHitPoints: 150, damage: 20})
@@ -39,3 +40,42 @@ describe('Characters', () => {
         expect(slime.damage).toBe(8)
     })
 })
+
+describe('Battle scene', () => {
+    let player
+    let ogre
+    let undead
+    let slime
+    let battleScene
+
+    beforeEach(() => {
+        player = new Player({name: 'Jane', maxHitPoints: 150, damage: 20})
+        ogre = new Ogre({name: 'Marnix', maxHitPoints: 500, damage: 100})
+        undead = new Undead({name: 'Jacob', maxHitPoints: 80, damage: 30})
+        slime = new Slime({name: 'Mr. Bubbles', maxHitPoints: 180, damage: 8})
+        battleScene = new BattleScene()
+    })
+
+    it('should exist', () => {
+        expect(battleScene).toBeInstanceOf(BattleScene)
+    })
+
+    it('if player fights an ogre the ogre should win', () => {
+        const result = battleScene.fight(player, ogre)
+
+        expect(result).toEqual(ogre)
+    })
+
+    it('if player fights an undead the player should win', () => {
+        const result = battleScene.fight(player, undead)
+
+        expect(result).toEqual(player)
+    })
+
+    it('if player fights a slime the player should win', () => {
+        const result = battleScene.fight(player, slime)
+
+        expect(result).toEqual(player)
+    })
+})
+

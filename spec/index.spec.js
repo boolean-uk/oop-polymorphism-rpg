@@ -88,6 +88,13 @@ describe("Characters", () => {
 
     expect(enemy3.currentHitPoints).toEqual(20)
   })
+
+  it("should take into account character's defense stat when calculating damage", ()=>{
+    player1.defense = 100
+    player1.takeDamage(enemy3)
+
+    expect(player1.currentHitPoints).toEqual(94)
+  })
 });
 
 

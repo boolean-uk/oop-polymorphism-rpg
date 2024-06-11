@@ -6,7 +6,8 @@ class Character {
     damage,
     equippedWeapon = "",
     equippedArmour = [],
-    strength
+    strength,
+    defense
   ) {
     this.name = name;
     this.maxHitPoints = maxHitPoints;
@@ -15,6 +16,7 @@ class Character {
     this.equippedWeapon = equippedWeapon;
     this.equippedArmour = equippedArmour;
     this._strength = strength
+    this._defense = defense
   }
 
   get damage() {
@@ -29,6 +31,10 @@ class Character {
     this._strength = strength
   }
 
+  set defense(defense) {
+    this._defense = defense
+  }
+
   get strengthMultiplier() {
     if (!this._strength) {
       return 1
@@ -36,8 +42,15 @@ class Character {
     return ((this._strength * 0.005) + 1)
   }
 
+  get defenseMultiplier() {
+    if (!this._defense) {
+      return 1
+    } 
+    return (1 - (this._defense * 0.004))
+  }
+
   takeDamage(attacker) {
-    let damageMitigation = 1;
+    let damageMitigation = this.defenseMultiplier
     if (this.equippedArmour.length > 0) {
       this.equippedArmour.forEach((armour) => {
         damageMitigation *= armour.damageModifier;

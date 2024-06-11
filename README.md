@@ -19,8 +19,11 @@ Create a simple RPG where a character can battle monsters
     - Create _at least_ 3 different enemies
 - Create a `BattleScene` class with a `fight` method that takes a player and an enemy as its parameters
     - Using a `while` loop, make the player and enemy hit each other (using their `takeDamage` methods) until one of them runs out of hit points, then return the winning character's name
+- You must create at least one test for each function you create
 
 ## Extensions
+
+Note: It might be difficult to create tests for some extensions. You do not need to write tests for these, though you can if you wish.
 
 1. Create an `EquippableItem` class that contains:
     - A `damageModifier` number

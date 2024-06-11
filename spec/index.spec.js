@@ -13,7 +13,7 @@ describe("Characters", () => {
   let enemy1;
   let enemy2;
   let enemy3;
-  let excalibur;
+
 
   beforeEach(() => {
     player1 = new Player("Will", 100, 100, 25);
@@ -68,10 +68,18 @@ describe("Characters", () => {
   });
 
   it('should cause damage calculated with modifiers from equipped weapon', ()=>{
-    excalibur = new Sword(2, "Excalibur");
+   const excalibur = new Sword(2, "Excalibur");
     enemy3.equipWeapon(excalibur)
     player1.takeDamage(enemy3)
     expect(player1.currentHitPoints).toEqual(80)
+  })
+
+  it('should cause damage mitigation with modifiers from equipped armour', ()=>{
+    const shouldersOfCheese = new Pauldrons(0.8, "Shoulders of Cheese");
+    player1.equipArmour(shouldersOfCheese)
+    player1.takeDamage(enemy3)
+
+    expect(player1.currentHitPoints).toEqual(92)
   })
 });
 

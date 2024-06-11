@@ -1,8 +1,3 @@
-import Player from "./player.js"
-import Character from "./index.js"
-import Goblin from "./goblin.js"
-
-
 class BattleScene {
 	constructor(p1, p2) {
 		this.p1 = p1
@@ -39,8 +34,4 @@ class BattleScene {
 
 export default BattleScene
 
-// const gob = new Goblin()
-// const pl1 = new Player('Test', 55, 9)
 
-// const battle = new BattleScene(gob, pl1)
-//  battle.fight()

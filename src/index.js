@@ -16,8 +16,8 @@ class Player extends Character {
         super().name = 'Horne'
     }
 
-    hitsObsorbed(attack) {
-        attack.takeDamage(this)
+    hitsObsorbed(combatant) {
+        combatant.takeDamage(this)
     }
 }
 
@@ -26,8 +26,8 @@ class Enemy1 extends Character {
         super().name = 'Villmata'
     }
 
-    hitsObsorbed(attack) {
-        attack.takeDamage(this)
+    hitsObsorbed(combatant) {
+        combatant.takeDamage(this)
     }
 }
 
@@ -36,8 +36,8 @@ class Enemy2 extends Character {
         super.name = 'Bearl'
     }
 
-    hitsObsorbed(attack) {
-        attack.takeDamage(this)
+    hitsObsorbed(combatant) {
+        combatant.takeDamage(this)
     }
 }
 
@@ -46,13 +46,43 @@ class Enemy3 extends Character {
         super().name = 'Clawes'
     }
 
-    hitsObsorbed(attack) {
-        attack.takeDamage(this)
+    hitsObsorbed(combatant) {
+        combatant.takeDamage(this)
     }
 }
 
+class BattleScene extends Character {
+    constructor() {
+        super()
+    }
+
+    fight(player, enemy) {
+        let strikes = 0
+        while(strikes < 6) {
+            strikes++
+            player.takeDamage(enemy)
+            enemy.takeDamage(player)
+            if (
+                enemy.currentHitPoints === 0 &&
+                player.currentHitPoints > enemy.currentHitPoints
+            ) {
+                return console.log(player.name)
+            } else if (
+                player.currentHitPoints === 0 &&
+                enemy.currentHitPoints > player.currentHitPoints
+            ) {
+                    return console.log(enemy.name)
+                }
+        }
+    }
+}
+export { Player, Enemy1 }
+export default Character
+
 const playerInstance = new Player()
 const enemyInstance = new Enemy1()
-enemyInstance.hitsObsorbed(playerInstance)
-enemyInstance.currentHitPoints
+const battleInstance = new BattleScene()
+battleInstance.fight(playerInstance, enemyInstance)
+
+
 

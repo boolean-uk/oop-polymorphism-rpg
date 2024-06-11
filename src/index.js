@@ -15,11 +15,19 @@ class Player extends Character {
     constructor() {
         super().name = 'Horne'
     }
+
+    hitsObsorbed(attack) {
+        attack.takeDamage(this)
+    }
 }
 
 class Enemy1 extends Character {
     constructor() {
         super().name = 'Villmata'
+    }
+
+    hitsObsorbed(attack) {
+        attack.takeDamage(this)
     }
 }
 
@@ -27,13 +35,24 @@ class Enemy2 extends Character {
     constructor() {
         super.name = 'Bearl'
     }
+
+    hitsObsorbed(attack) {
+        attack.takeDamage(this)
+    }
 }
 
-class Enemy2 extends Character {
+class Enemy3 extends Character {
     constructor() {
         super().name = 'Clawes'
+    }
+
+    hitsObsorbed(attack) {
+        attack.takeDamage(this)
     }
 }
 
 const playerInstance = new Player()
-console.log(playerInstance.name)
+const enemyInstance = new Enemy1()
+enemyInstance.hitsObsorbed(playerInstance)
+enemyInstance.currentHitPoints
+

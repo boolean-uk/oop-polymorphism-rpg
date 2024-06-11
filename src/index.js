@@ -13,7 +13,19 @@ class Character {
             this.currentHitPoints -= attacker.equipedWeapon.calculateDamage(attacker.damage)
         }
 
-        this.currentHitPoints -= attacker.damage
+        if (this.equipedArmour.length >= 1) {
+            let damage = attacker.damage
+
+            for (let i = 0; i < this.equipedArmour.length; i++) {
+                damage *= this.equipedArmour[i].damageModifier
+            }
+
+            this.currentHitPoints -= damage
+        }
+
+        if (!attacker.equipedWeapon && this.equipedArmour.length === 0) {
+            this.currentHitPoints -= attacker.damage
+        }
     }
 
     equipArmour(item) {
@@ -80,27 +92,39 @@ class EquippableItem {
     }
 
     calculateDamage(damageNumber) {
-        if (this.type = 'weapon') {
-            let damage = damageNumber
-            damage += this.damageModifier
-            return damage
-        }
-
-        if (this.type = 'armour') {
-            let damage = damageNumber
-            damage -= this.damageModifier
-            return damage
-        }
-
+        return damageNumber * this.damageModifier
     }
 }
 
 class MoonLightSword extends EquippableItem {
     constructor(damageModifier) {
         super(damageModifier)
-        this.type = 'weapon'
+    }
+}
+
+class HavelsHelmet extends EquippableItem {
+    constructor(damageModifier) {
+        super(damageModifier)
+    }
+}
+
+class HavelsBoots extends EquippableItem {
+    constructor(damageModifier) {
+        super(damageModifier)
+    }
+}
+
+class HavelsChest extends EquippableItem {
+    constructor(damageModifier) {
+        super(damageModifier)
+    }
+}
+
+class HavelsPants extends EquippableItem {
+    constructor(damageModifier) {
+        super(damageModifier)
     }
 }
 
 export default Player
-export { Ogre, Undead, Slime, BattleScene, MoonLightSword }
+export { Ogre, Undead, Slime, BattleScene, MoonLightSword, HavelsHelmet, HavelsBoots, HavelsChest, HavelsPants }

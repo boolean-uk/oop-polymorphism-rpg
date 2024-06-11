@@ -1,4 +1,4 @@
-import Player, { Ogre, Undead, Slime, BattleScene, MoonLightSword } from "../src/index.js";
+import Player, { Ogre, Undead, Slime, BattleScene, MoonLightSword, HavelsHelmet, HavelsBoots, HavelsChest, HavelsPants } from "../src/index.js";
 
 describe('Characters', () => {
     let player
@@ -47,14 +47,22 @@ describe('Battle scene', () => {
     let slime
     let battleScene
     let moonLightSword
+    let havelsHelmet
+    let havelsBoots
+    let havelsChest
+    let havelsPants
 
     beforeEach(() => {
         player = new Player({name: 'Jane', maxHitPoints: 150, damage: 20})
-        ogre = new Ogre({name: 'Marnix', maxHitPoints: 500, damage: 100})
+        ogre = new Ogre({name: 'Marnix', maxHitPoints: 200, damage: 100})
         undead = new Undead({name: 'Jacob', maxHitPoints: 80, damage: 30})
         slime = new Slime({name: 'Mr. Bubbles', maxHitPoints: 180, damage: 8})
         battleScene = new BattleScene()
-        moonLightSword = new MoonLightSword(40)
+        moonLightSword = new MoonLightSword(1.5)
+        havelsHelmet = new HavelsHelmet(0.8)
+        havelsBoots = new HavelsBoots(0.8)
+        havelsChest = new HavelsChest(0.4)
+        havelsPants = new HavelsPants(0.5)
     })
 
     it('should exist', () => {
@@ -82,7 +90,7 @@ describe('Battle scene', () => {
     it('character should be able to equip a weapon', () => {
         player.equipWeapon(moonLightSword)
 
-        expect(player.equipedWeapon.damageModifier).toBe(40)
+        expect(player.equipedWeapon.damageModifier).toBe(1.5)
     })
 
     it('should throw an error if character tries to equip more than one weapon', () => {
@@ -91,12 +99,39 @@ describe('Battle scene', () => {
         expect(() => player.equipWeapon(moonLightSword)).toThrow('you have reached the max of 1 weapon item')
     })
 
-    it('should deal extra damaga when having a weapon equipped', () => {
+    it('should deal extra damage when having a weapon equipped', () => {
         undead.equipWeapon(moonLightSword)
 
         const result = battleScene.fight(player, undead)
 
         expect(result).toEqual(undead)
+    })
+
+    it('character should be able to equip an armour piece', () => {
+        player.equipArmour(havelsHelmet)
+
+        expect(player.equipedArmour[0].damageModifier).toBe(0.8)
+    })
+
+    it('should throw an error if character tries to equip more than four armour pieces', () => {
+        player.equipArmour(havelsHelmet)
+        player.equipArmour(havelsBoots)
+        player.equipArmour(havelsChest)
+        player.equipArmour(havelsPants)
+
+
+        expect(() => player.equipArmour(havelsBoots)).toThrow('you have reached the max of 4 armour items')
+    })
+
+    it('should deal less damage when having armour equipped', () => {
+        player.equipArmour(havelsHelmet)
+        player.equipArmour(havelsBoots)
+        player.equipArmour(havelsChest)
+        player.equipArmour(havelsPants)
+
+        const result = battleScene.fight(player, ogre)
+
+        expect(result).toEqual(player)
     })
 })
 

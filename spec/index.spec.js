@@ -13,6 +13,7 @@ describe("Characters", () => {
   let enemy1;
   let enemy2;
   let enemy3;
+  let excalibur;
 
   beforeEach(() => {
     player1 = new Player("Will", 100, 100, 25);
@@ -65,6 +66,13 @@ describe("Characters", () => {
 
     expect(() => {player1.equipArmour(sneakers);}).toThrowError('Characters can only equip 4 items of armour');
   });
+
+  it('should cause damage calculated with modifiers from equipped weapon', ()=>{
+    excalibur = new Sword(2, "Excalibur");
+    enemy3.equipWeapon(excalibur)
+    player1.takeDamage(enemy3)
+    expect(player1.currentHitPoints).toEqual(80)
+  })
 });
 
 
@@ -76,12 +84,15 @@ describe("Battle scene", () => {
   let enemy1;
   let enemy2;
   let enemy3;
+  let excalibur;
 
   beforeEach(() => {
     player1 = new Player("Will", 100, 100, 25);
     enemy1 = new Enemy("Goblin", 20, 20, 5);
     enemy2 = new Enemy("Giant", 200, 200, 20);
     enemy3 = new Enemy("Necromancer", 50, 50, 10);
+
+    excalibur = new Sword(2)
   });
 
   it("should return the name of the surviving combatant", () => {
@@ -93,11 +104,3 @@ describe("Battle scene", () => {
   });
 });
 
-// describe("Equippable items", ()=> {
-//     let excalibur
-
-//     beforeEach(()=> {
-//       excalibur = new Sword(1.5, 'Excalibur')
-//     })
-
-// })

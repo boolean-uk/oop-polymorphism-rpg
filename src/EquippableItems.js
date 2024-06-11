@@ -3,7 +3,9 @@ class EquippableItem {
     this.damageModifier = damageModifier;
   }
 
-  calculateDamage(damageNumber) {}
+  calculateDamage(damageNumber) {
+    return this.damageModifier * damageNumber
+  }
 }
 
 class Sword extends EquippableItem {

@@ -3,13 +3,23 @@ class Character {
     this.name = name;
     this.maxHitPoints = maxHitPoints;
     this.currentHitPoints = currentHitPoints;
-    this.damage = damage;
+    this._damage = damage;
     this.equippedWeapon = equippedWeapon
     this.equippedArmour = equippedArmour
   }
 
+  get damage() {
+    if (this.equippedWeapon) {
+    return this.equippedWeapon.calculateDamage(this._damage)
+    } else {
+      return this._damage
+    }
+  }
+
   takeDamage(attacker) {
-    this.currentHitPoints -= attacker.damage;
+    let damageMitigation = 1
+    this.equippedArmour.forEach((armour) => armour.damageModifier *= damageMitigation)
+    this.currentHitPoints -= (attacker.damage * damageMitigation)
   }
 
   equipWeapon(weapon) {

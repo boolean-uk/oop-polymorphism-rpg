@@ -100,4 +100,22 @@ describe('Character Classes', () => {
             expect(player.currentHitPoints).toBe(96)
         })
     })
+
+    describe('Attributes in damage calculation', () => {
+        it('should calculate atrribute based damage resistance correctly', () => {
+            player.attributes.set('defence', 20)
+            expect(player.takeDamage(npc)).toBe(98)
+        })
+
+        it('should calculate atrribute based damage output correctly', () => {
+            player.attributes.set('strength', 20)
+            expect(player.damageOutput()).toBe(20)
+        })
+
+        it('should calculate atrribute based damage output correctly when a critical strike occurs', () => {
+            player.attributes.set('strength', 20)
+            player.attributes.set('critChance', 100)
+            expect(player.damageOutput()).toBe(20)
+        })
+    })
 })

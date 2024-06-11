@@ -17,6 +17,10 @@ export default class Character {
         this.equipment.set('armour', [])
         this.maximumWeapons = maximumWeapons
         this.maximumArmour = maximumArmour
+        this.attributes = new Map()
+        this.attributes.set('strength', 0)
+        this.attributes.set('defence', 0)
+        this.attributes.set('critChance', 0)
     }
 
     equip(item) {
@@ -41,11 +45,24 @@ export default class Character {
 
     damageOutput() {
         let damage = this.damage
+        const strength = this.attributes.get('strength')
         const weapons = this.equipment.get('weapons')
         for (let i = 0; i < weapons.length; i++ ) {
             damage = weapons[i].calculateDamage(damage)
         }
-        return damage
+
+        const finalDamage = damage * Math.round(1 + (strength * 0.05))
+        return finalDamage * (this.isCrit() ? 2 : 1)
+    }
+
+    isCrit() {
+        const critChance = this.attributes.get('critChance', 0)
+        
+        if((Math.floor(Math.random() * 101)) < (critChance * 0.05)) {
+            return true
+        }
+
+        return false
     }
 
     damageResist() {
@@ -54,13 +71,14 @@ export default class Character {
         for (let i = 0; i < armour.length; i++) {
             resist = armour[i].calculateDamage(resist)
         }
-        return resist
+        return resist 
     }
 
     takeDamage(attacker) {
         const damageTaken = attacker.damageOutput() - this.damageResist()
+        const defence = this.attributes.get('defence')
 
-        this.currentHitPoints -= this.damageTaken < 0 ? 0 : damageTaken
+        this.currentHitPoints -= this.damageTaken < 0 ? 0 : Math.ceil((damageTaken * (1 - (defence * 0.04))))
         return this.currentHitPoints
     }
 }

@@ -1,5 +1,4 @@
-import exp from "constants"
-import Character, {Player, Enemy1 } from "../src/index.js"
+import Character, {Player, Enemy1, BattleScene } from "../src/index.js"
 
 describe('Character', () => {
     let character
@@ -26,5 +25,19 @@ describe('Player and Enemies', () => {
         player.hitsObsorbed(enemy)
         expect(player.currentHitPoints).toBe(25)
         expect(enemy.currentHitPoints).toBe(30)
+    })
+})
+describe('BattleScene', () => {
+    let player
+    let enemy
+    let battle
+    beforeEach(() => {
+        player = new Player()
+        enemy = new Enemy1()
+        battle = new BattleScene()
+    })
+    it('should allow player and enemies to fight', () => {
+        const result = battle.fight(player, enemy)
+        expect(result).toBe('Horne')
     })
 })

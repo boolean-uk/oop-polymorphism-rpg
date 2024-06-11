@@ -76,7 +76,7 @@ class BattleScene extends Character {
         }
     }
 }
-export { Player, Enemy1 }
+export { Player, Enemy1, BattleScene }
 export default Character
 
 const playerInstance = new Player()

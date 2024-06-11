@@ -24,6 +24,7 @@ class Player extends Character {
 class Enemy1 extends Character {
     constructor() {
         super().name = 'Villmata'
+        this.damage = 10
     }
 
     hitsObsorbed(combatant) {
@@ -33,7 +34,8 @@ class Enemy1 extends Character {
 
 class Enemy2 extends Character {
     constructor() {
-        super.name = 'Bearl'
+        super().name = 'Bearl'
+        this.damage = 3
     }
 
     hitsObsorbed(combatant) {
@@ -44,6 +46,7 @@ class Enemy2 extends Character {
 class Enemy3 extends Character {
     constructor() {
         super().name = 'Clawes'
+        this.damage = 6
     }
 
     hitsObsorbed(combatant) {
@@ -63,15 +66,14 @@ class BattleScene extends Character {
             player.takeDamage(enemy)
             enemy.takeDamage(player)
             if (
-                enemy.currentHitPoints === 0 &&
-                player.currentHitPoints > enemy.currentHitPoints
+                player.currentHitPoints === 0
+                
             ) {
-                return console.log(player.name)
+                return enemy.name
             } else if (
-                player.currentHitPoints === 0 &&
-                enemy.currentHitPoints > player.currentHitPoints
+                enemy.currentHitPoints === 0
             ) {
-                    return console.log(enemy.name)
+                return player.name
                 }
         }
     }
@@ -81,6 +83,7 @@ export default Character
 
 const playerInstance = new Player()
 const enemyInstance = new Enemy1()
+const enemy2 = new Enemy2()
 const battleInstance = new BattleScene()
 battleInstance.fight(playerInstance, enemyInstance)
 

@@ -23,7 +23,7 @@ describe('Player and Enemies', () => {
     })
     it('should obsorb hits from an attacker which calls the takeDamge method', () => {
         player.hitsObsorbed(enemy)
-        expect(player.currentHitPoints).toBe(25)
+        expect(player.currentHitPoints).toBe(20)
         expect(enemy.currentHitPoints).toBe(30)
     })
 })
@@ -38,6 +38,6 @@ describe('BattleScene', () => {
     })
     it('should allow player and enemies to fight', () => {
         const result = battle.fight(player, enemy)
-        expect(result).toBe('Horne')
+        expect(result).toBe('Villmata')
     })
 })

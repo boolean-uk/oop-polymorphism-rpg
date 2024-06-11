@@ -27,6 +27,14 @@ describe("Characters", () => {
 
     expect(player1.equippedWeapon).toEqual(excalibur)
   })
+
+  it("should be unable to equip a weapon if it already has a weapon equipped", () => {
+    const excalibur = new Sword(2, 'Excalibur')
+    const claymore = new Sword(3, 'Claymore')
+    player1.equipWeapon(excalibur)
+
+    expect(() => player1.equipWeapon(claymore)).toThrowError('This character already has a weapon equipped')
+  })
 });
 
 describe("Battle scene", () => {

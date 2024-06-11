@@ -13,6 +13,9 @@ class Character {
   }
 
   equipWeapon(weapon) {
+    if (this.equippedWeapon) {
+      throw new Error('This character already has a weapon equipped')
+    }
     this.equippedWeapon = weapon
   }
 }

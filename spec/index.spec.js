@@ -1,6 +1,12 @@
 import { Player, Enemy } from "../src/Characters.js";
 import BattleScene from "../src/BattleScene.js";
-import { Sword } from "../src/EquippableItems.js"
+import {
+  Sword,
+  Helmet,
+  Gloves,
+  Boots,
+  Pauldrons,
+} from "../src/EquippableItems.js";
 
 describe("Characters", () => {
   let player1;
@@ -22,20 +28,48 @@ describe("Characters", () => {
   });
 
   it("should be able to equip a weapon", () => {
-    const excalibur = new Sword(2, 'Excalibur')
-    player1.equipWeapon(excalibur)
+    const excalibur = new Sword(2, "Excalibur");
+    player1.equipWeapon(excalibur);
 
-    expect(player1.equippedWeapon).toEqual(excalibur)
-  })
+    expect(player1.equippedWeapon).toEqual(excalibur);
+  });
 
   it("should be unable to equip a weapon if it already has a weapon equipped", () => {
-    const excalibur = new Sword(2, 'Excalibur')
-    const claymore = new Sword(3, 'Claymore')
-    player1.equipWeapon(excalibur)
+    const excalibur = new Sword(2, "Excalibur");
+    const claymore = new Sword(3, "Claymore");
+    player1.equipWeapon(excalibur);
 
-    expect(() => player1.equipWeapon(claymore)).toThrowError('This character already has a weapon equipped')
-  })
+    expect(() => player1.equipWeapon(claymore)).toThrowError(
+      "This character already has a weapon equipped"
+    );
+  });
+
+  it("should be able to equip armour", () => {
+    const shouldersOfCheese = new Pauldrons(0.8, "Shoulders of Cheese");
+    player1.equipArmour(shouldersOfCheese);
+
+    expect(player1.equippedArmour[0]).toEqual(shouldersOfCheese);
+  });
+
+  it("should be unable to equip more than 4 pieces of armour", () => {
+    const shouldersOfCheese = new Pauldrons(0.8, "Shoulders of Cheese");
+    const helmetOfCustard = new Helmet(0.95, 'Helmet of Custard')
+    const bootsOfPork = new Boots(0.9, 'Boots of Pork')
+    const glovesOfChutney = new Gloves(0.9, 'Gloves of Chutney')
+    const sneakers = new Boots(1.3, 'Converse')
+
+    player1.equipArmour(shouldersOfCheese);
+    player1.equipArmour(helmetOfCustard);
+    player1.equipArmour(bootsOfPork);
+    player1.equipArmour(glovesOfChutney);
+
+    expect(() => {player1.equipArmour(sneakers);}).toThrowError('Characters can only equip 4 items of armour');
+  });
 });
+
+
+
+
 
 describe("Battle scene", () => {
   let player1;
@@ -57,7 +91,6 @@ describe("Battle scene", () => {
     const battleScene2 = new BattleScene(player1, enemy2);
     expect(battleScene2.fight()).toEqual("Giant wins!");
   });
-
 });
 
 // describe("Equippable items", ()=> {
@@ -66,6 +99,5 @@ describe("Battle scene", () => {
 //     beforeEach(()=> {
 //       excalibur = new Sword(1.5, 'Excalibur')
 //     })
-
 
 // })

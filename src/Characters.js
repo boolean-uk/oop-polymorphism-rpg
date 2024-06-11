@@ -18,6 +18,13 @@ class Character {
     }
     this.equippedWeapon = weapon
   }
+  
+  equipArmour(armour) {
+    if (this.equippedArmour.length >= 4) {
+      throw new Error('Characters can only equip 4 items of armour')
+    }
+    this.equippedArmour.push(armour)
+  }
 }
 
 class Player extends Character {

@@ -4,11 +4,11 @@ class EquipableItem {
 	}
 
 	weaponDamageModifier() {
-		return this.damageModifier + 1
+        return this.damageModifier
     }
     
-    armorDamageModifier() {
-        return this.damageModifier - 1
+    armorDamageModifier(damage) {
+        return damage - this.damageModifier 
     }
 }
 

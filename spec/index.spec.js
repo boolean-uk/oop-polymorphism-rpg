@@ -3,6 +3,7 @@ import Player from "../src/player.js"
 import Goblin from "../src/goblin.js"
 import BattleScene from "../src/BattleScene.js"
 import Weapon from "../src/Weapons.js"
+import Armor from "../src/Armor.js"
 
 describe("character", () => {
 	let charSheet
@@ -28,7 +29,7 @@ describe("Player", () => {
 
 	beforeEach(() => {
 		player1 = new Player("Hero", 35, 6)
-		player2 = new Player("Enemy", 33, 1)
+		player2 = new Goblin("Enemy", 33, 3)
 	})
 
 	it("should be able to create multiple new characters with different names and stats", () => {
@@ -39,10 +40,10 @@ describe("Player", () => {
 		expect(player1.currentHitPoints).toBe(35)
 		expect(player2.currentHitPoints).toBe(33)
 		expect(player1.damage).toBe(6)
-		expect(player2.damage).toBe(1)
+		expect(player2.damage).toBe(3)
 	})
 	
-	it('hsould be able to equip a weapon', () => {
+	it('should be able to equip a weapon', () => {
 		const sword = new Weapon(3, 'sword')
 		player1.equipWeapon(sword)
 		expect(player1.weapon).toEqual(sword)
@@ -61,14 +62,20 @@ describe("BatleScene", () => {
 	let player2
 	let bow
 	let dagger
+	let leatherArmor
+	let chainMail
 
 	beforeEach(() => {
 		bow = new Weapon(9, 'longbow')
 		dagger = new Weapon(4, 'sting')
+		leatherArmor = new Armor(3, 'paddedLeather')
+		chainMail = new Armor(5,'chaiMail')
 		player1 = new Player("Hero", 66, 5)
 		player1.equipWeapon(bow)
+		player1.equipArmor(chainMail)
 		player2 = new Goblin("Enemy", 44, 3)
 		player2.equipWeapon(dagger)
+		player2.equipArmor(leatherArmor)
 		fight = new BattleScene(player1, player2)
 	})
 
@@ -81,8 +88,6 @@ describe("BatleScene", () => {
 		expect(fight.p1.damage).toBe(5)
 		expect(fight.p2.name).toBe("Enemy")
 		expect(fight.p2.damage).toBe(3)
-		console.log(player1);
-		console.log(player2);
 	})
 
 	it("should return the name of the winner", () => {

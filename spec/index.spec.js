@@ -1,9 +1,9 @@
 import Character from "../src/index.js"
 import Player from "../src/player.js"
 import Goblin from "../src/goblin.js"
-import BattleScene from "../src/BattleScene.js"
-import Weapon from "../src/Weapons.js"
-import Armor from "../src/Armor.js"
+import BattleScene from "../src/battleScene.js"
+import Weapon from "../src/weapons.js"
+import Armor from "../src/armor.js"
 
 describe("character", () => {
 	let charSheet
@@ -29,7 +29,7 @@ describe("Player", () => {
 
 	beforeEach(() => {
 		player1 = new Player("Hero", 35, 6)
-		player2 = new Goblin("Enemy", 33, 3)
+		player2 = new Goblin("Enemy", 33, 2)
 	})
 
 	it("should be able to create multiple new characters with different names and stats", () => {
@@ -40,7 +40,7 @@ describe("Player", () => {
 		expect(player1.currentHitPoints).toBe(35)
 		expect(player2.currentHitPoints).toBe(33)
 		expect(player1.damage).toBe(6)
-		expect(player2.damage).toBe(3)
+		expect(player2.damage).toBe(2)
 	})
 	
 	it('should be able to equip a weapon', () => {

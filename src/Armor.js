@@ -1,4 +1,4 @@
-import EquipableItem from "./EquipableItems.js"
+import EquipableItem from "./equipableItems.js"
 
 class Armor extends EquipableItem {
 	constructor(damageModifier, name) {

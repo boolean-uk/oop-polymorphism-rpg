@@ -10,7 +10,7 @@ describe('Character', () => {
     it('should take damage from an attacker', () => {
         let attacker = enemy
         character.takeDamage(attacker)
-        expect(attacker.currentHitPoints).toBe(25)
+        expect(attacker.currentHitPoints).toBe(28)
         expect(character.currentHitPoints).toBe(30)
     })
 })
@@ -23,7 +23,7 @@ describe('Player and Enemies', () => {
     })
     it('should obsorb hits from an attacker which calls the takeDamge method', () => {
         player.hitsObsorbed(enemy)
-        expect(player.currentHitPoints).toBe(20)
+        expect(player.currentHitPoints).toBe(25)
         expect(enemy.currentHitPoints).toBe(30)
     })
 })

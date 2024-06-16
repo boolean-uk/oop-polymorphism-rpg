@@ -6,7 +6,11 @@ import BattleScene,
       Boss, 
       EquippableItem, 
       Club, 
-      Sword } 
+      Sword, 
+      Helmet, 
+      Shield, 
+      Breatsplate, 
+      Boots } 
       from "../src/index.js"
 
 describe("Core Criteria", () => {
@@ -72,5 +76,28 @@ describe("Core Criteria", () => {
           minion.equipWeapon(rustySword);
           expect(minion.weapon).toBe(rustySword);
         });
-      
+
+     it("should equip not more than 4 armours", () => {
+    expect(player.armour.length).toBe(0)
+    
+    let superiorHelment = new Helmet(0.9)
+    player.equipArmour(superiorHelment)
+    expect(player.armour.length).toBe(1)
+    
+    let oldShield = new Shield(0.4)
+    player.equipArmour(oldShield)
+    expect(player.armour.length).toBe(2)
+    
+    let knightsBreastPlate = new Breatsplate(1.5)
+    player.equipArmour(knightsBreastPlate)
+    expect(player.armour.length).toBe(3)
+    
+    let newBoots = new Boots(1.0)
+    player.equipArmour(newBoots)
+    expect(player.armour.length).toBe(4)
+
+    let newShield = new Shield(1.5)
+    expect(()=>{player.equipArmour(newShield)}).toThrow("cannot add more armour")
+  })
+ 
 })

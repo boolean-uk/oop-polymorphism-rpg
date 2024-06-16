@@ -1,5 +1,15 @@
 export default class BattleScene {
-
+    fight(characterA, characterB) {
+        while (characterA.currentHitPoints > 0 && characterB.currentHitPoints > 0) {
+          characterA.takeDamage(characterB);
+          characterB.takeDamage(characterA);
+        }
+    
+        return characterA.currentHitPoints > characterB.currentHitPoints
+          ? characterA
+          : characterB;
+      }
+    
 
 }
 

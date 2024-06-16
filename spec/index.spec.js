@@ -34,4 +34,9 @@ describe("Core Criteria", () => {
         expect(player.currentHitPoints).toBe(player.maxHitPoints - minion.damage)
       });
     
+      it("should fight",()=>{
+        let result = battleScene.fight(player, minion)
+        expect(result).toBe(player)
+      })
+     
 })

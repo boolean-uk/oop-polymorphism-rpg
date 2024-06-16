@@ -29,5 +29,9 @@ describe("Core Criteria", () => {
       expect(boss).toBeInstanceOf(Boss);
     });
 
-
+    it("should take damage", () => {
+        player.takeDamage(minion)
+        expect(player.currentHitPoints).toBe(player.maxHitPoints - minion.damage)
+      });
+    
 })

@@ -15,17 +15,26 @@ export default class BattleScene {
 
 
 export class Character {
-    constructor(name, maxHitPoints, damage) {
+    constructor(
+        name,
+        maxHitPoints,
+        damage,
+        strength = 0,
+        
+      ) {
         this.name = name;
         this.maxHitPoints = maxHitPoints;
         this.currentHitPoints = maxHitPoints;
-        this.damage = damage;
-      }
+        this.damage = damage + (0.5 / 100) * strength;  }
     
       takeDamage(attacker) {
         this.currentHitPoints -= attacker.damage;
       }
     
+      equipWeapon(weapon) {
+        this.weapon = weapon;
+        this.damage = this.weapon.calculateDamage(this.damage);
+      }
 }
 
 export class Player extends Character {}
@@ -35,3 +44,16 @@ export class Minion extends Character {}
 export class MiniBoss extends Character {}
 
 export class Boss extends Character {}
+
+export class EquippableItem{
+    constructor(damageModifier){
+        this.damageModifier = damageModifier
+    }
+    calculateDamage(damage){}
+
+}
+
+// weapons
+export class Club extends EquippableItem {}
+export class Sword extends EquippableItem {}
+

@@ -1,4 +1,13 @@
-import BattleScene, { Character, Player, Minion, MiniBoss, Boss } from "../src/index.js"
+import BattleScene, 
+{ Character,
+     Player, 
+     Minion, 
+     MiniBoss,
+      Boss, 
+      EquippableItem, 
+      Club, 
+      Sword } 
+      from "../src/index.js"
 
 describe("Core Criteria", () => {
     let battleScene, character, player, minion, miniBoss, boss;
@@ -38,5 +47,30 @@ describe("Core Criteria", () => {
         let result = battleScene.fight(player, minion)
         expect(result).toBe(player)
       })
-     
+    })  
+
+      describe("Extension criteria", () => {
+        let battleScene, character, player, minion, miniBoss, boss;
+        beforeEach(() => {
+          battleScene = new BattleScene();
+          character = new Character("npc", 100, 10);
+          player = new Player("player", 100, 1.1);
+          minion = new Minion("player", 100, 0.7);
+          miniBoss = new MiniBoss("player", 100, 1.5);
+          boss = new Boss("player", 100, 2.1);
+        });
+      
+        it("should equip one weapon", () => {
+          let club = new Club(0.6);
+          expect(club).toBeInstanceOf(EquippableItem);
+          expect(club).toBeInstanceOf(Club);
+      
+          minion.equipWeapon(club);
+          expect(minion.weapon).toBe(club);
+      
+          let rustySword = new Sword(0.9);
+          minion.equipWeapon(rustySword);
+          expect(minion.weapon).toBe(rustySword);
+        });
+      
 })
